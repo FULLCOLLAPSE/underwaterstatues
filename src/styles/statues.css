@@ -94,7 +94,7 @@ nav.site { display: flex; gap: 32px; line-height: 1; }
 .prose p { margin: 0 0 1em; font-size: 16px; line-height: 1.5; }
 .prose img { margin: 24px 0; width: 100%; height: auto; }
 .prose.wide { max-width: 960px; }
-.prose img.float { float: right; width: 44%; margin: 6px 0 24px 32px; }
+.prose img.float { float: left; width: 44%; margin: 6px 32px 24px 0; }
 .prose::after { content: ""; display: block; clear: both; }
 .prose a { text-decoration: underline; }
 .entry-head { padding: var(--pad); display: flex; flex-direction: column; gap: 16px; }
