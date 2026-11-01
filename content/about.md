@@ -1,9 +1,7 @@
 ---
-title: Hardware for the rig, made by someone who uses it.
+title: Thoughtfully considered solutions to everyday production problems.
 ---
 
-Underwater Statues is a small hardware company run by a working photographer. Every part here started as something missing from a set: a thumbscrew that could be turned with cold hands, an adapter that let a receiver sit where it should, a bracket that held a laptop without a tripod's worth of clamps.
+Underwater Statues was created with the goal of solving everyday creative industry production problems with thoughtfully considered solutions. Taking inspiration from clients' and colleagues' daily annoyances and existing industry peers to arrive at a hardware solution which seems almost obvious in its final form.
 
-Parts are designed in CAD, prototyped on the printer, used on real jobs, then produced in small runs. The journal is where the thinking happens — each product has an entry about why it exists and what changed along the way.
-
-Everything ships from Indiana. Questions go to the [contact page](/contact).
+The products Underwater Statues sells are created in small batches, with various additive and subtractive manufacturing techniques. The additive manufacturing products are created with a mix of SLS, MJF, and FDM processes using PA12 and PA11 nylon and PETG thermoplastics. The products made using subtractive manufacturing utilize CNC machining with high-quality 6000 series black anodized aluminum.
