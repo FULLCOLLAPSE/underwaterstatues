@@ -24,4 +24,10 @@ const faq = defineCollection({
   }),
 });
 
-export const collections = { journal, faq };
+// Single pages whose text lives in markdown: content/about.md.
+const pages = defineCollection({
+  loader: glob({ pattern: '*.md', base: './content' }),
+  schema: z.object({ title: z.string() }),
+});
+
+export const collections = { journal, faq, pages };

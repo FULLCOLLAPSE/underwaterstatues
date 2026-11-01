@@ -1,14 +1,18 @@
 ---
+import { getEntry, render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import SectionLabel from '../components/SectionLabel.astro';
+
+// Text comes from content/about.md — edit that file, not this one.
+const about = await getEntry('pages', 'about');
+if (!about) throw new Error('content/about.md is missing');
+const { Content } = await render(about);
 ---
 <Base title="About" description="Underwater Statues makes mounting hardware for camera rigs.">
   <SectionLabel text="About" />
   <div class="rule"></div>
   <article class="prose">
-    <h1>Hardware for the rig, made by someone who uses it.</h1>
-    <p>Underwater Statues is a small hardware company run by a working photographer. Every part here started as something missing from a set: a thumbscrew that could be turned with cold hands, an adapter that let a receiver sit where it should, a bracket that held a laptop without a tripod's worth of clamps.</p>
-    <p>Parts are designed in CAD, prototyped on the printer, used on real jobs, then produced in small runs. The journal is where the thinking happens — each product has an entry about why it exists and what changed along the way.</p>
-    <p>Everything ships from Indiana. Questions go to the <a href="/contact">contact page</a>.</p>
+    <h1>{about.data.title}</h1>
+    <Content />
   </article>
 </Base>
