@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import SectionLabel from '../../components/SectionLabel.astro';
+import ProductTile from '../../components/ProductTile.astro';
+import { getProduct } from '../../lib/products';
+import { fmtDate } from '../../lib/dates';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('journal', (e) => !e.data.draft);
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const product = entry.data.product ? await getProduct(entry.data.product) : undefined;
+const description = entry.body?.split(/\n\s*\n/)[0]?.slice(0, 160);
+---
+<Base title={entry.data.title} description={description}>
+  <SectionLabel text="Journal" href="/journal" />
+  <div class="rule"></div>
+  <section class:list={['two', { single: !product }]} style={product ? '' : 'grid-template-columns:1fr'}>
+    <div class="cell" style="display:flex;flex-direction:column">
+      <div class="entry-head">
+        <span class="cap">{fmtDate(entry.data.date)}</span>
+        <h1>{entry.data.title}</h1>
+      </div>
+      {entry.data.cover && entry.data.cover !== product?.image && <><div class="rule"></div><img class="entry-cover" src={entry.data.cover} alt="" /></>}
+      <div class="rule"></div>
+      <article class="prose"><Content /></article>
+    </div>
+    {product && (
+      <div style="display:flex;flex-direction:column">
+        <div class="label cap"><span>The product</span></div>
+        <div class="rule"></div>
+        <ProductTile product={product} />
+      </div>
+    )}
+  </section>
+</Base>

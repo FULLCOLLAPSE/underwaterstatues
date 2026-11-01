@@ -1,0 +1,9 @@
+---
+import { fmtDate } from '../lib/dates';
+interface Props { href: string; date: Date; title: string }
+const { href, date, title } = Astro.props;
+---
+<a href={href} class="row">
+  <span class="cap">{fmtDate(date)}</span>
+  <span class="title">{title}</span>
+</a>

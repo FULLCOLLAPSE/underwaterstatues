@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+import ProductTile from '../components/ProductTile.astro';
+import JournalRow from '../components/JournalRow.astro';
+import { getProducts, getProduct, STORE_URL } from '../lib/products';
+import { fmtDate } from '../lib/dates';
+
+const entries = (await getCollection('journal', (e) => !e.data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// The hero is the newest entry flagged `featured`, paired with its product.
+const hero = entries.find((e) => e.data.featured && e.data.product);
+const heroProduct = hero?.data.product ? await getProduct(hero.data.product) : undefined;
+
+// Excerpt: the first two paragraphs of the entry body, ellipsis on the second.
+const paras = (hero?.body ?? '').split(/\n\s*\n/).map((s) => s.trim()).filter((s) => s && !s.startsWith('!') && !s.startsWith('#'));
+const excerpt = paras.slice(0, 2);
+if (excerpt[1]) excerpt[1] = excerpt[1].replace(/[.!?]?$/, '…');
+
+const products = (await getProducts()).filter((p) => p.permalink !== heroProduct?.permalink).slice(0, 3);
+const recent = entries.slice(0, 3);
+---
+<Base>
+  {hero && heroProduct && (
+    <>
+      <SectionLabel text="New in" href={heroProduct.url} />
+      <section class="feat">
+        <ProductTile product={heroProduct} featured />
+        <div class="about">
+          <span class="cap">About the design</span>
+          <div class="body">
+            <h2><a href={`/journal/${hero.id}`}>{hero.data.title}</a></h2>
+            {excerpt.map((p) => <p>{p}</p>)}
+          </div>
+          <div class="foot">
+            <span class="cap">Journal — {fmtDate(hero.data.date)}</span>
+            <a href={`/journal/${hero.id}`} class="cap" style="text-decoration:underline">Read the full entry</a>
+          </div>
+        </div>
+      </section>
+      <div class="rule"></div>
+    </>
+  )}
+
+  <SectionLabel text="Store" href={STORE_URL} />
+  <section class="grid3">
+    {products.map((p) => <ProductTile product={p} />)}
+  </section>
+
+  <SectionLabel text="Journal" href="/journal" tight />
+  <section class="rows">
+    <div class="rule"></div>
+    {recent.map((e) => <JournalRow href={`/journal/${e.id}`} date={e.data.date} title={e.data.title} />)}
+  </section>
+</Base>

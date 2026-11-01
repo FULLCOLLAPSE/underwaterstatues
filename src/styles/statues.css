@@ -1,0 +1,142 @@
+/* Underwater Statues — one stylesheet. Helvetica, hairlines, two colours. */
+
+:root {
+  --bg: #fff;
+  --fg: #000;
+  --pad: 32px;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #000; --fg: #fff; }
+}
+
+html { background: var(--bg); }
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main { display: flex; flex-direction: column; flex: 1 0 auto; }
+
+a { color: var(--fg); text-decoration: none; }
+a:hover { text-decoration: underline; }
+p { margin: 0; }
+img { display: block; max-width: 100%; }
+
+.rule { border-top: 1px solid var(--fg); }
+.cell { border-right: 1px solid var(--fg); }
+.cell:last-child { border-right: 0; }
+.cap { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+
+/* header */
+header.site {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 28px var(--pad) 24px 0;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.hdrlink { width: 25%; display: flex; justify-content: center; box-sizing: border-box; padding: 0 28px; }
+.hdr { width: 100%; display: block; height: auto; fill: currentColor; }
+nav.site { display: flex; gap: 32px; line-height: 1; }
+
+/* section labels */
+.label { padding: var(--pad); display: flex; justify-content: space-between; }
+.label.tight { padding-bottom: 0; }
+.label > span { display: inline-flex; align-items: baseline; }
+.chev { display: inline-block; vertical-align: baseline; margin-left: 8px; overflow: visible; }
+
+/* featured (A5 hero) */
+.feat { display: grid; grid-template-columns: 2fr 1fr; border-top: 1px solid var(--fg); }
+.feat .tile { display: flex; flex-direction: column; }
+.featimg { width: 100%; height: 620px; object-fit: cover; background: #fff; }
+.feat .meta { display: flex; justify-content: space-between; padding: 20px var(--pad); font-size: 20px; }
+.feat .about {
+  padding: var(--pad);
+  display: flex; flex-direction: column; justify-content: space-between; gap: var(--pad);
+}
+.feat .about .body { display: flex; flex-direction: column; gap: 20px; }
+.feat .about h2 { margin: 0; font-weight: 400; font-size: 28px; line-height: 1.1; letter-spacing: -0.02em; }
+.feat .about .foot { display: flex; flex-direction: column; gap: 10px; }
+
+/* store grid */
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--fg);
+  border-bottom: 1px solid var(--fg);
+}
+.tile { display: flex; flex-direction: column; }
+.tile img { width: 100%; height: auto; background: #fff; }
+.tile .meta { display: flex; justify-content: space-between; padding: 16px var(--pad); }
+
+/* journal rows */
+.rows { padding: 12px var(--pad) 48px; }
+.row {
+  display: grid; grid-template-columns: 160px 1fr; gap: 24px;
+  padding: 20px 0; border-bottom: 1px solid var(--fg);
+}
+.row .title { font-size: 20px; line-height: 1.2; }
+
+/* prose pages (journal entry, about, contact) */
+.prose { padding: var(--pad); max-width: 720px; }
+.prose h1 { font-weight: 400; font-size: 28px; line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 24px; }
+.prose h2 { font-weight: 400; font-size: 20px; line-height: 1.2; margin: 40px 0 12px; }
+.prose p { margin: 0 0 1em; font-size: 16px; line-height: 1.5; }
+.prose img { margin: 24px 0; width: 100%; height: auto; }
+.prose a { text-decoration: underline; }
+.entry-head { padding: var(--pad); display: flex; flex-direction: column; gap: 16px; }
+.entry-head h1 { font-weight: 400; font-size: 28px; line-height: 1.1; letter-spacing: -0.02em; margin: 0; max-width: 720px; }
+.entry-cover { width: 100%; height: auto; background: #fff; }
+.two { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--fg); }
+
+/* faq + form */
+.faq { padding: 12px var(--pad) 0; }
+.faq details { border-bottom: 1px solid var(--fg); }
+.faq summary { padding: 20px 0; font-size: 20px; line-height: 1.2; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: baseline; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: ""; width: 10px; height: 10px; border-right: 1px solid var(--fg); border-bottom: 1px solid var(--fg); transform: rotate(45deg); flex: none; margin-left: 16px; }
+.faq details[open] summary::after { transform: rotate(-135deg); }
+.faq .answer { padding: 0 0 24px; max-width: 720px; font-size: 16px; line-height: 1.5; }
+.form { padding: var(--pad); max-width: 720px; display: flex; flex-direction: column; gap: 24px; }
+.form label { display: flex; flex-direction: column; gap: 8px; }
+.form input, .form textarea {
+  font: inherit; font-size: 16px; color: var(--fg); background: transparent;
+  border: 0; border-bottom: 1px solid var(--fg); border-radius: 0; padding: 8px 0; outline: none;
+}
+.form textarea { min-height: 160px; resize: vertical; }
+.form button {
+  font: inherit; align-self: flex-start; cursor: pointer;
+  background: var(--fg); color: var(--bg); border: 1px solid var(--fg); padding: 14px 28px;
+}
+.form button:hover { background: var(--bg); color: var(--fg); }
+
+/* footer */
+footer.site {
+  padding: 24px var(--pad);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+footer.site .links { display: flex; gap: 32px; }
+
+/* mobile */
+@media (max-width: 720px) {
+  header.site { padding-left: 0; padding-right: 0; justify-content: center; }
+  .hdrlink { width: 100%; padding: 0; }
+  .hdr { width: 85%; }
+  nav.site { width: 100%; justify-content: center; padding-bottom: 4px; }
+  .feat { grid-template-columns: 1fr; }
+  .feat > .cell { border-right: 0; border-bottom: 1px solid var(--fg); }
+  .featimg { height: auto; object-fit: contain; }
+  .grid3, .two { grid-template-columns: minmax(0, 1fr); }
+  .cell { border-right: 0; border-bottom: 1px solid var(--fg); }
+  .grid3 .cell:last-child { border-bottom: 0; }
+  .row { grid-template-columns: 1fr; gap: 8px; }
+}

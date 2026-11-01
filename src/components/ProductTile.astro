@@ -1,0 +1,11 @@
+---
+import type { Product } from '../lib/products';
+// Photo, hairline, name + price. `featured` is the big A5 hero tile.
+interface Props { product: Product; featured?: boolean }
+const { product, featured = false } = Astro.props;
+---
+<a href={product.url} class:list={['cell', 'tile']}>
+  <img class:list={{ featimg: featured }} src={product.image} alt={product.name} loading={featured ? 'eager' : 'lazy'} />
+  <div class="rule"></div>
+  <div class="meta"><span>{product.name}</span><span>{product.priceLabel}</span></div>
+</a>

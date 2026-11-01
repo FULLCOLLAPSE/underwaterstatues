@@ -1,0 +1,47 @@
+---
+import '../styles/statues.css';
+import Wordmark from '../components/Wordmark.astro';
+import { STORE_URL } from '../lib/products';
+
+interface Props { title?: string; description?: string }
+const { title, description = 'Mounting hardware for camera rigs.' } = Astro.props;
+const fullTitle = title ? `${title} — Underwater Statues` : 'Underwater Statues';
+const year = new Date().getFullYear();
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+</head>
+<body>
+  <header class="site">
+    <a href="/" aria-label="Underwater Statues home" class="hdrlink"><Wordmark /></a>
+    <nav class="site cap">
+      <a href={STORE_URL}>Store</a>
+      <a href="/journal">Journal</a>
+      <a href="/about">About</a>
+      <a href={`${STORE_URL}/cart`} data-cart>Cart</a>
+    </nav>
+  </header>
+  <div class="rule"></div>
+  <main>
+    <slot />
+  </main>
+  <div class="rule" style="margin-top:auto"></div>
+  <footer class="site cap">
+    <span>© {year} UNDERWATER STATUES</span>
+    <div class="links">
+      <a href="https://instagram.com/Underwater_Statues" rel="me">Instagram</a>
+      <a href="/contact">Contact</a>
+      <a href="/terms">Terms</a>
+    </div>
+  </footer>
+</body>
+</html>

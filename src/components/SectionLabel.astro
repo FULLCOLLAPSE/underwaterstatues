@@ -1,0 +1,10 @@
+---
+import Chevron from './Chevron.astro';
+// A small-caps section heading with the chevron, optionally a link.
+interface Props { text: string; href?: string; tight?: boolean }
+const { text, href, tight = false } = Astro.props;
+const Tag = href ? 'a' : 'span';
+---
+<section class:list={['label', 'cap', { tight }]}>
+  <Tag href={href}>{text}<Chevron /></Tag>
+</section>
