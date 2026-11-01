@@ -11,8 +11,9 @@ const { Content } = await render(about);
 <Base title="About" description="Underwater Statues makes mounting hardware for camera rigs.">
   <SectionLabel text="About" />
   <div class="rule"></div>
-  <article class="prose">
+  <article class="prose wide">
     <h1>{about.data.title}</h1>
+    {about.data.image && <img class="float" src={about.data.image} alt={about.data.imageAlt ?? ''} width="1600" height="1600" />}
     <Content />
   </article>
 </Base>

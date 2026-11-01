@@ -1,5 +1,7 @@
 ---
 title: Thoughtfully considered solutions to everyday production problems.
+image: /images/about/transmitter-patch.jpg
+imageAlt: Pillar patch mounted on a 4K wireless transmitter, with mounting clamps behind.
 ---
 
 Underwater Statues was created with the goal of solving everyday creative industry production problems with thoughtfully considered solutions. Taking inspiration from clients' and colleagues' daily annoyances and existing industry peers to arrive at a hardware solution which seems almost obvious in its final form.
