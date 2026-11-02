@@ -26,7 +26,7 @@ export const GET: APIRoute = async () => {
     },
     site_url: 'https://www.underwaterstatues.com',
     display_url: 'https://www.underwaterstatues.com',
-    logo: { src: '/admin/logo.svg', show_in_header: true },
+    logo: { src: '/admin/logo.svg?v=2', show_in_header: true },
     media_folder: 'public/images/journal',
     public_folder: '/images/journal',
     // Photos dropped in are resized to 1600px wide and converted to WebP before upload.
