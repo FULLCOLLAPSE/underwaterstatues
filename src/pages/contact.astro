@@ -3,7 +3,7 @@ import { getCollection, render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import SectionLabel from '../components/SectionLabel.astro';
 
-const faqs = (await getCollection('faq')).sort((a, b) => a.id.localeCompare(b.id));
+const faqs = (await getCollection('faq')).sort((a, b) => a.data.order - b.data.order || a.id.localeCompare(b.id));
 const rendered = await Promise.all(faqs.map(async (f) => ({ q: f.data.question, Content: (await render(f)).Content })));
 ---
 <Base title="Contact" description="Questions about shipping, returns, fit, or anything else.">
