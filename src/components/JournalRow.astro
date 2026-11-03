@@ -1,9 +1,25 @@
 ---
 import { fmtDate } from '../lib/dates';
-interface Props { href: string; date: Date; title: string }
-const { href, date, title } = Astro.props;
+interface Props { href: string; date: Date; title: string; image?: string; intro?: string; compact?: boolean }
+const { href, date, title, image, intro, compact } = Astro.props;
 ---
-<a href={href} class="row">
-  <span class="cap">{fmtDate(date)}</span>
-  <span class="title">{title}</span>
-</a>
+{compact ? (
+  <a href={href} class="row">
+    <span class="cap">{fmtDate(date)}</span>
+    <span class="title">{title}</span>
+  </a>
+) : (
+<article class:list={['entry', { noimg: !image }]}>
+  {image && (
+    <a href={href} class="entry-img" tabindex="-1" aria-hidden="true"><img src={image} alt="" loading="lazy" /></a>
+  )}
+  <div class="entry-text">
+    <div class="entry-top">
+      <span class="cap">{fmtDate(date)}</span>
+      <h2><a href={href}>{title}</a></h2>
+      {intro && <p>{intro}</p>}
+    </div>
+    <a href={href} class="more cap">More</a>
+  </div>
+</article>
+)}

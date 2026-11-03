@@ -6,12 +6,29 @@ import JournalRow from '../../components/JournalRow.astro';
 
 const entries = (await getCollection('journal', (e) => !e.data.draft))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// First picture: the cover if set, otherwise the first image in the text.
+// Intro: the first paragraph that is actual prose, with markdown stripped.
+function firstImage(body = '') {
+  const md = body.match(/!\[[^\]]*\]\(([^)\s]+)/);
+  const html = body.match(/<img[^>]+src=["']([^"']+)/i);
+  return md?.[1] ?? html?.[1];
+}
+function intro(body = '') {
+  const para = body.split(/\n\s*\n/).map((p) => p.trim())
+    .find((p) => p && !/^(#|!\[|<|[-*>]\s|\d+\.\s)/.test(p));
+  if (!para) return undefined;
+  return para
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+    .replace(/[*_`]+/g, '')
+    .replace(/\s+/g, ' ');
+}
 ---
 <Base title="Journal" description="Notes on designing and making camera-rig hardware.">
   <SectionLabel text="Journal" tight />
   <section class="rows">
     <div class="rule"></div>
-    {entries.map((e) => <JournalRow href={`/journal/${e.id}`} date={e.data.date} title={e.data.title} />)}
+    {entries.map((e) => <JournalRow href={`/journal/${e.id}`} date={e.data.date} title={e.data.title} image={e.data.cover ?? firstImage(e.body)} intro={intro(e.body)} />)}
     {entries.length === 0 && <p class="cap" style="padding:20px 0">Nothing yet.</p>}
   </section>
 </Base>

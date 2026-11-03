@@ -52,6 +52,6 @@ const recent = entries.slice(0, 3);
   <SectionLabel text="Journal" href="/journal" tight />
   <section class="rows">
     <div class="rule"></div>
-    {recent.map((e) => <JournalRow href={`/journal/${e.id}`} date={e.data.date} title={e.data.title} />)}
+    {recent.map((e) => <JournalRow href={`/journal/${e.id}`} date={e.data.date} title={e.data.title} compact />)}
   </section>
 </Base>
