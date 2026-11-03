@@ -1,0 +1,16 @@
+// Contact-form mailer for underwaterstatues.com.
+// Deployed by Cloudflare Workers Builds from this folder. The site's
+// /api/contact Pages Function forwards form posts here through a service binding.
+{
+  "name": "us-contact",
+  "main": "index.js",
+  "compatibility_date": "2026-10-15",
+  "workers_dev": false,
+  "send_email": [
+    {
+      "name": "MAILER",
+      // Email Routing only delivers to verified addresses; lock it to the one inbox.
+      "destination_address": "justin@justindennisphoto.com"
+    }
+  ]
+}
