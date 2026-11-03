@@ -7,6 +7,9 @@ interface Props { title?: string; description?: string }
 const { title, description = 'Mounting hardware for camera rigs.' } = Astro.props;
 const fullTitle = title ? `${title} — Underwater Statues` : 'Underwater Statues';
 const year = new Date().getFullYear();
+// Clean URL for the canonical tag: /about, not /about.html; / for the homepage.
+const cleanPath = Astro.url.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '');
+const canonical = new URL(cleanPath, Astro.site).href;
 ---
 <!doctype html>
 <html lang="en">
@@ -20,7 +23,7 @@ const year = new Date().getFullYear();
   <link rel="icon" href="/favicon.ico" sizes="32x32" />
   <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+  <link rel="canonical" href={canonical} />
 </head>
 <body>
   <header class="site">
