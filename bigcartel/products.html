@@ -1,0 +1,20 @@
+{% comment %} All products (and category/search results), A5 grid. {% endcomment %}
+{% paginate products from products.current by 24 %}
+<section class="label cap"><span>{% if page.full_url contains 'search=' %}Search{% elsif page.name != 'Products' %}{{ page.name }}{% else %}Store{% endif %}<svg class="chev" viewBox="0 0 12 7" aria-hidden="true" width="12" height="7"><path d="M1 1 L6 6 L11 1" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg></span>
+  {% if categories.active.size > 1 %}<span class="cats">{% for category in categories.active %}<a href="{{ category.url }}">{{ category.name }}</a>{% endfor %}</span>{% endif %}
+</section>
+{% if products.size > 0 %}
+<section class="grid3">
+  {% for product in products %}
+    <a href="{{ product.url }}" class="cell tile">
+      <img src="{{ product.image | product_image_url | constrain: 800 }}" srcset="{{ product.image | product_image_url | constrain: 600 }} 600w, {{ product.image | product_image_url | constrain: 1000 }} 1000w, {{ product.image | product_image_url | constrain: 1600 }} 1600w" sizes="(max-width: 720px) 100vw, 33vw" alt="{{ product.name | escape }}" loading="{% if forloop.index <= 3 %}eager{% else %}lazy{% endif %}">
+      <div class="rule"></div>
+      <div class="meta"><span>{{ product.name }}</span><span>{% if product.status == 'sold-out' %}Sold out{% elsif product.status == 'coming-soon' %}Soon{% else %}{{ product.default_price | money_with_sign | remove: '.00' }}{% endif %}</span></div>
+    </a>
+  {% endfor %}
+</section>
+{% if paginate.pages > 1 %}<nav class="pager cap">{{ paginate | default_pagination }}</nav>{% endif %}
+{% else %}
+<section class="rows"><div class="rule"></div><p class="cap" style="padding:20px 0">No products found.</p></section>
+{% endif %}
+{% endpaginate %}

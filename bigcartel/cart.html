@@ -1,0 +1,31 @@
+{% comment %} Cart: one row per item, hairlines, subtotal, checkout. {% endcomment %}
+<section class="label cap"><span>Cart</span></section>
+{% if cart.items == blank %}
+  <section class="rows"><div class="rule"></div><p class="cap" style="padding:20px 0">Your cart is empty. <a href="/products" style="text-decoration:underline">Back to the store</a></p></section>
+{% else %}
+  <form method="post" action="/cart" id="cart-form" class="cart">
+    <input type="hidden" name="cart_submit" value="true">
+    <div class="rule"></div>
+    {% for item in cart.items %}
+      <div class="cart-row" data-item>
+        <a href="{{ item.product.url }}" class="cart-img"><img src="{{ item.product.image | product_image_url | constrain: 300 }}" alt="{{ item.product.name | escape }}"></a>
+        <div class="cart-name">
+          <a href="{{ item.product.url }}">{{ item.product.name }}</a>
+          {% unless item.product.has_default_option %}<span class="cap">{{ item.option.name }}</span>{% endunless %}
+          <button type="button" class="linkish cap" data-remove>Remove</button>
+        </div>
+        <label class="cart-qty"><span class="cap">Qty</span>{{ item | item_quantity_input }}</label>
+        <span class="cart-price">{{ item.price | money_with_sign }}</span>
+      </div>
+    {% endfor %}
+    <div class="cart-foot">
+      <span class="cap">Subtotal</span>
+      <span class="cart-total">{{ cart.total | money_with_sign }}</span>
+    </div>
+    <div class="cart-actions">
+      <button type="submit" name="update" class="button ghost cap">Update</button>
+      <button type="submit" name="checkout" class="button cap">Checkout</button>
+    </div>
+    <p class="cart-note cap">Shipping and tax are calculated at checkout.</p>
+  </form>
+{% endif %}

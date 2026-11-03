@@ -1,0 +1,15 @@
+{% comment %} Store front page: every product, A5 grid. {% endcomment %}
+<section class="label cap"><span>Store<svg class="chev" viewBox="0 0 12 7" aria-hidden="true" width="12" height="7"><path d="M1 1 L6 6 L11 1" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg></span></section>
+{% if products.all.size > 0 %}
+<section class="grid3">
+  {% for product in products.all %}
+    <a href="{{ product.url }}" class="cell tile">
+      <img src="{{ product.image | product_image_url | constrain: 800 }}" srcset="{{ product.image | product_image_url | constrain: 600 }} 600w, {{ product.image | product_image_url | constrain: 1000 }} 1000w, {{ product.image | product_image_url | constrain: 1600 }} 1600w" sizes="(max-width: 720px) 100vw, 33vw" alt="{{ product.name | escape }}" loading="{% if forloop.index <= 3 %}eager{% else %}lazy{% endif %}">
+      <div class="rule"></div>
+      <div class="meta"><span>{{ product.name }}</span><span>{% if product.status == 'sold-out' %}Sold out{% elsif product.status == 'coming-soon' %}Soon{% else %}{{ product.default_price | money_with_sign | remove: '.00' }}{% endif %}</span></div>
+    </a>
+  {% endfor %}
+</section>
+{% else %}
+<section class="rows"><div class="rule"></div><p class="cap" style="padding:20px 0">Nothing here yet.</p></section>
+{% endif %}

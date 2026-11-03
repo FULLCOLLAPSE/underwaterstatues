@@ -1,0 +1,61 @@
+{% comment %} One product: photos left, details right. {% endcomment %}
+<section class="label cap"><a href="/products">Store<svg class="chev" viewBox="0 0 12 7" aria-hidden="true" width="12" height="7"><path d="M1 1 L6 6 L11 1" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg></a></section>
+<section class="pdp">
+  <div class="cell pdp-images">
+    {% for image in product.images %}
+      {% unless forloop.first %}<div class="rule"></div>{% endunless %}
+      <img src="{{ image | product_image_url | constrain: 1000 }}" srcset="{{ image | product_image_url | constrain: 700 }} 700w, {{ image | product_image_url | constrain: 1000 }} 1000w, {{ image | product_image_url | constrain: 1600 }} 1600w, {{ image | product_image_url | constrain: 2000 }} 2000w" sizes="(max-width: 720px) 100vw, 60vw" alt="{{ product.name | escape }}, image {{ forloop.index }}" {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>
+    {% endfor %}
+  </div>
+  <div class="pdp-info">
+    <div class="pdp-sticky">
+      <h1>{{ product.name }}</h1>
+      <p class="pdp-price">
+        {% case product.status %}
+          {% when 'sold-out' %}Sold out
+          {% when 'coming-soon' %}Coming soon
+          {% else %}{{ product.default_price | money_with_sign | remove: '.00' }}{% if product.variable_pricing %}+{% endif %}
+        {% endcase %}
+      </p>
+
+      {% if product.status == 'active' %}
+        <form method="post" action="/cart" accept-charset="utf8" class="pdp-form">
+          <input type="hidden" name="utf8" value="✓">
+          {% if product.has_default_option %}
+            {{ product.option | hidden_option_input }}
+          {% else %}
+            <label class="cap" for="option">Option</label>
+            <select id="option" name="cart[add][id]" required>
+              <option value="" disabled selected>Choose</option>
+              {% for option in product.options %}
+                <option value="{{ option.id }}"{% if option.sold_out %} disabled{% endif %}>{{ option.name }}{% if option.sold_out %} — sold out{% elsif option.price != product.default_price %} — {{ option.price | money_with_sign }}{% endif %}</option>
+              {% endfor %}
+            </select>
+          {% endif %}
+          <button type="submit" class="button cap">Add to cart</button>
+        </form>
+      {% endif %}
+
+      {% if product.description != blank %}
+        <div class="rule"></div>
+        <div class="pdp-desc">{{ product.description | paragraphs }}</div>
+      {% endif %}
+
+      <a class="pdp-journal cap" data-journal="{{ product.permalink }}" href="https://www.underwaterstatues.com/journal" hidden>Read about the design</a>
+    </div>
+  </div>
+</section>
+<script>
+  // Shows "Read about the design" only when the journal has an entry for this product.
+  (function () {
+    var a = document.querySelector('[data-journal]');
+    if (!a || !window.fetch) return;
+    fetch('https://www.underwaterstatues.com/journal/products.json')
+      .then(function (r) { return r.ok ? r.json() : {}; })
+      .then(function (map) {
+        var url = map[a.getAttribute('data-journal')];
+        if (url) { a.href = url; a.hidden = false; }
+      })
+      .catch(function () {});
+  })();
+</script>

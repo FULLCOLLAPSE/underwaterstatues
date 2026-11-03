@@ -1,0 +1,3 @@
+/journal/products.json
+  Access-Control-Allow-Origin: https://store.underwaterstatues.com
+  Cache-Control: public, max-age=300
