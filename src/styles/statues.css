@@ -98,10 +98,8 @@ nav.site { display: flex; gap: 32px; line-height: 1; }
 .entry-text h2 { margin: 0; font-weight: 400; font-size: 28px; line-height: 1.2; letter-spacing: -0.02em; }
 .entry-text h2 a:hover { text-decoration: none; }
 .entry-text p { font-size: 16px; line-height: 1.5; max-width: 560px; display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; }
-.more {
-  align-self: flex-start; padding: 14px 28px; border: 1px solid var(--fg);
-}
-.more:hover { background: var(--fg); color: var(--bg); text-decoration: none; }
+.more { align-self: flex-start; }
+.more:hover { text-decoration: underline; }
 
 /* prose pages (journal entry, about, contact) */
 .prose { padding: var(--pad); max-width: 720px; }
