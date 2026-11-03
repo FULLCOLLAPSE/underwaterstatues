@@ -7,9 +7,9 @@ const faqs = (await getCollection('faq')).sort((a, b) => a.data.order - b.data.o
 const rendered = await Promise.all(faqs.map(async (f) => ({ q: f.data.question, Content: (await render(f)).Content })));
 ---
 <Base title="Contact" description="Questions about shipping, returns, fit, or anything else.">
-  <SectionLabel text="Questions" tight />
+  <SectionLabel text="Questions" />
+  <div class="rule"></div>
   <section class="faq">
-    <div class="rule"></div>
     {rendered.map(({ q, Content }) => (
       <details>
         <summary>{q}</summary>
@@ -18,8 +18,8 @@ const rendered = await Promise.all(faqs.map(async (f) => ({ q: f.data.question, 
     ))}
   </section>
 
-  <SectionLabel text="Contact" tight />
-  <section style="padding:12px var(--pad) 0"><div class="rule"></div></section>
+  <SectionLabel text="Contact" />
+  <div class="rule"></div>
   <form class="form" method="post" action="/api/contact" data-contact>
     <label><span class="cap">Name</span><input name="name" type="text" required autocomplete="name" /></label>
     <label><span class="cap">Email</span><input name="email" type="email" required autocomplete="email" /></label>

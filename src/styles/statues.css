@@ -80,7 +80,7 @@ nav.site { display: flex; gap: 32px; line-height: 1; }
 .tile .meta { display: flex; justify-content: space-between; padding: 16px var(--pad); }
 
 /* journal rows */
-.rows { padding: 12px var(--pad) 48px; }
+.rows { padding: 0 var(--pad) 48px; }
 .row {
   display: grid; grid-template-columns: 160px 1fr; gap: 24px;
   padding: 20px 0; border-bottom: 1px solid var(--fg);
@@ -117,7 +117,7 @@ nav.site { display: flex; gap: 32px; line-height: 1; }
 .two { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--fg); }
 
 /* faq + form */
-.faq { padding: 12px var(--pad) 0; }
+.faq { padding: 0 var(--pad); }
 .faq details { border-bottom: 1px solid var(--fg); }
 .faq summary { padding: 20px 0; font-size: 20px; line-height: 1.2; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: baseline; }
 .faq summary::-webkit-details-marker { display: none; }

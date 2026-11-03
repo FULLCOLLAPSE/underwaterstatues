@@ -49,9 +49,9 @@ const recent = entries.slice(0, 3);
     {products.map((p) => <ProductTile product={p} />)}
   </section>
 
-  <SectionLabel text="Journal" href="/journal" tight />
+  <SectionLabel text="Journal" href="/journal" />
+  <div class="rule"></div>
   <section class="rows">
-    <div class="rule"></div>
     {recent.map((e) => <JournalRow href={`/journal/${e.id}`} date={e.data.date} title={e.data.title} compact />)}
   </section>
 </Base>
