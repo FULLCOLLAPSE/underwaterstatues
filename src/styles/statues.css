@@ -65,7 +65,7 @@ nav.site { display: flex; gap: 32px; line-height: 1; }
   display: flex; flex-direction: column; justify-content: space-between; gap: var(--pad);
 }
 .feat .about .body { display: flex; flex-direction: column; gap: 20px; }
-.feat .about h2 { margin: 0; font-weight: 400; font-size: 28px; line-height: 1.1; letter-spacing: -0.02em; }
+.feat .about h2 { margin: 0; padding-bottom: 0.06em; font-weight: 400; font-size: 28px; line-height: 1.2; letter-spacing: -0.02em; }
 .feat .about .foot { display: flex; flex-direction: column; gap: 10px; }
 
 /* store grid */
@@ -89,7 +89,7 @@ nav.site { display: flex; gap: 32px; line-height: 1; }
 
 /* prose pages (journal entry, about, contact) */
 .prose { padding: var(--pad); max-width: 720px; }
-.prose h1 { font-weight: 400; font-size: 28px; line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 24px; }
+.prose h1 { font-weight: 400; font-size: 28px; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 24px; }
 .prose h2 { font-weight: 400; font-size: 20px; line-height: 1.2; margin: 40px 0 12px; }
 .prose p { margin: 0 0 1em; font-size: 16px; line-height: 1.5; }
 .prose img { margin: 24px 0; width: 100%; height: auto; }
@@ -98,7 +98,7 @@ nav.site { display: flex; gap: 32px; line-height: 1; }
 .prose::after { content: ""; display: block; clear: both; }
 .prose a { text-decoration: underline; }
 .entry-head { padding: var(--pad); display: flex; flex-direction: column; gap: 16px; }
-.entry-head h1 { font-weight: 400; font-size: 28px; line-height: 1.1; letter-spacing: -0.02em; margin: 0; max-width: 720px; }
+.entry-head h1 { font-weight: 400; font-size: 28px; line-height: 1.2; letter-spacing: -0.02em; margin: 0; max-width: 720px; }
 .entry-cover { width: 100%; height: auto; background: #fff; }
 .two { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--fg); }
 
