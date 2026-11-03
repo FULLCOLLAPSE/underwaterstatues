@@ -49,7 +49,7 @@ header.site {
 nav.site { display: flex; gap: 32px; line-height: 1; }
 
 /* section labels */
-.label { padding: var(--pad); display: flex; justify-content: space-between; }
+.label { padding: 18px var(--pad); display: flex; justify-content: space-between; }
 .label.tight { padding-bottom: 0; }
 .label > span { display: inline-flex; align-items: baseline; }
 .chev { display: inline-block; vertical-align: baseline; margin-left: 8px; overflow: visible; }
@@ -58,7 +58,7 @@ nav.site { display: flex; gap: 32px; line-height: 1; }
 .feat { display: grid; grid-template-columns: 3fr 2fr; border-top: 1px solid var(--fg); }
 .feat .tile { display: flex; flex-direction: column; }
 /* Hero height tracks the viewport so header + label + hero + price row sit above the fold. */
-.tile img.featimg { width: 100%; height: clamp(400px, calc(100dvh - 300px), 620px); object-fit: contain; background: #fff; }
+.tile img.featimg { width: 100%; height: clamp(400px, calc(100dvh - 270px), 620px); object-fit: contain; background: #fff; }
 .feat .meta { display: flex; justify-content: space-between; padding: 20px var(--pad); font-size: 20px; }
 .feat .about {
   padding: var(--pad);
